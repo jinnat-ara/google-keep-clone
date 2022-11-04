@@ -6,30 +6,36 @@ import Header from "./component/Header";
 import Note from "./component/Note";
 
 function App() {
-  const [additem, setItem]=useState([])
+  const [list, setList] = useState([])
 
-  const addnote=(note)=>{
-    setItem.push(note)
+  const addnote = (note) => {
+    setList([...list,note]);
+  }
+
+
+
+  const generateRandomColor = () => {
+    const randomColor = "#"+Math.floor(Math.random() * 16777215).toString(16);
+    return randomColor;
   }
 
 
   return (
     <div >
-<Header/>
-<Createnote passnote={addnote}/>
+      <Header />
+      <Createnote passnote={addnote} />
 
 
-{additem.map((index,val)=>{
-  return(
-    <Note key={index}
-    id={index}
-title={val.title}
-content={val.title}
-
-
-  />
-  )
-})}
+      {list.map((item, index) => {
+        return (
+          <Note key={index}
+            id={index}
+            title={item.title}
+            content={item.content}
+            background={generateRandomColor()}
+          />
+        )
+      })}
     </div>
   );
 }
